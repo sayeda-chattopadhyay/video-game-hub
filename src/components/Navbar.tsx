@@ -1,11 +1,12 @@
 import { HStack, Image, Text } from "@chakra-ui/react";
+import ModeSwitch from "./ModeSwich";
 import logo from "../assets/logo.svg";
 
 const Navbar = () => {
   return (
-    <HStack>
+    <HStack justifyContent={"space-between"} padding={ "20px"}>
       <Image src={logo} boxSize="60px" />
-      <Text>Navbar</Text>
+      <ModeSwitch />
     </HStack>
   );
 };
