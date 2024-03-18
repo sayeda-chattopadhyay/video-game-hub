@@ -7,7 +7,7 @@ import CardContainer from "./cardContainer";
 const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const GameList = () => {
-  const { games, error, isLoading } = useGames();
+  const { data, error, isLoading } = useGames();
   return (
     <>
       {error && <Text> {error}</Text>}
@@ -22,7 +22,7 @@ const GameList = () => {
               <LoadingSkeleton key={skeleton} />
             </CardContainer>
           ))}
-        {games.map((game) => (
+        {data.map((game) => (
           <CardContainer>
             <GameCard key={game.id} game={game} />
           </CardContainer>
