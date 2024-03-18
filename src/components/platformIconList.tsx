@@ -19,10 +19,7 @@ interface Props {
 }
 
 const PlatformIconList = ({ platforms }: Props) => {
-  // The PlatformIconList component takes a list of platforms and renders the name of each platform.
-  // create a iconList object that maps the platform name to the corresponding icon component.
-  // key is string and value is IconType from react-icons.
-
+  
   const iconMap: { [key: string]: IconType } = {
     pc: FaWindows,
     playstation: FaPlaystation,
