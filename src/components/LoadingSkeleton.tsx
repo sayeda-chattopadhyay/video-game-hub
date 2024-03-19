@@ -2,11 +2,11 @@ import { Card, Skeleton, CardBody, SkeletonText } from "@chakra-ui/react";
 
 const LoadingSkeleton = () => {
   return (
-    <Card>
-      <Skeleton height="200px" />
+    <Card height="300px" width="400px">
       <CardBody>
-        <SkeletonText />
+        <Skeleton />
       </CardBody>
+      <SkeletonText />
     </Card>
   );
 };
