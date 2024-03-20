@@ -5,16 +5,18 @@ import LoadingSkeleton from "./LoadingSkeleton";
 import CardContainer from "./cardContainer";
 import { Genre } from "../hooks/useGenres";
 import { Platform } from "../hooks/usePlatform";
+import {GameQuery} from "../App";
 
 const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  gameQuery: GameQuery;
+  // selectedGenre: Genre | null;
+  // selectedPlatform: Platform | null;
 }
 
-const GameList = ({ selectedGenre, selectedPlatform }: Props) => {
-  const { data, error, isLoading } = useGames(selectedGenre, selectedPlatform);
+const GameList = ({ gameQuery }: Props) => {
+  const { data, error, isLoading } = useGames(gameQuery);
   return (
     <>
       {/* if there is any error */}
