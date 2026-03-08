@@ -1,26 +1,30 @@
 # Video Game Hub
 
-A responsive web app to browse and filter video games using the [RAWG Video Games Database API](https://rawg.io/apidocs).
+A responsive, multi-page web application for browsing, searching, and exploring video games — powered by the [RAWG Video Games Database API](https://rawg.io/apidocs).
 
 ## Features
 
-- Browse games with cover images, ratings, and Metacritic scores
-- Filter by genre and platform
-- Search games by title
-- Sort by various criteria
-- Dark mode by default
-- Responsive grid layout (1–4 columns)
+- **Home page** — hero search, Trending, Top Rated, and New Releases sections
+- **Games browser** (`/games`) — filter by genre and platform, sort by multiple criteria, infinite scroll with Load More
+- **Game detail page** (`/games/:id`) — full info including description, screenshots, platforms, genres, developers, and publishers
+- Search from anywhere — navigates to the games browser automatically
+- Dark mode by default with light mode toggle
+- Responsive layout (mobile → 4-column grid)
 - Skeleton loading states
+- About & contact section on the home page
 
 ## Tech Stack
 
-- **React 18** + **TypeScript**
-- **Chakra UI** — component library and theming
-- **React Query** — data fetching and caching
-- **Axios** — HTTP client
-- **Vite** — build tool
-- **Framer Motion** — animations
-- **React Icons** — platform icons
+| | |
+|---|---|
+| **React 18** + **TypeScript** | UI and type safety |
+| **React Router v6** | Client-side routing |
+| **React Query v4** | Data fetching, caching, infinite scroll |
+| **Axios** | HTTP client with API key injection |
+| **Chakra UI** | Component library and theming |
+| **Framer Motion** | Animations (Chakra peer dep) |
+| **React Icons** | Platform and UI icons |
+| **Vite** | Build tool with code splitting |
 
 ## Getting Started
 
@@ -56,17 +60,41 @@ The app runs at `http://localhost:5173`.
 | Command | Description |
 |---|---|
 | `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
+| `npm run build` | Production build with code splitting |
+| `npm run preview` | Preview the production build locally |
 
 ## Project Structure
 
 ```
 src/
-├── components/   # UI components (GameCard, GenreList, Navbar, etc.)
-├── hooks/        # Custom React Query hooks (useGames, useGenres, etc.)
-├── services/     # Axios client and image URL helpers
-├── App.tsx       # Root layout
-├── main.tsx      # Entry point
-└── theme.tsx     # Chakra UI custom theme
+├── types/              # Shared TypeScript interfaces (Game, Genre, Platform)
+├── context/            # GameQueryContext — global filter/search state
+├── hooks/              # React Query data hooks
+│   ├── useData.tsx     # Generic useQuery wrapper
+│   ├── useGames.tsx    # Game list (home sections)
+│   ├── useInfiniteGames.ts  # Paginated game list (/games)
+│   ├── useGame.ts      # Single game detail
+│   ├── useGameScreenshots.ts
+│   ├── useGenres.tsx
+│   └── usePlatform.tsx
+├── services/           # Axios client, image URL helper
+├── components/
+│   ├── layout/         # Header, Footer
+│   ├── ui/             # CriticScore, Emoji, PlatformIconList, SearchInput, AboutSection, ...
+│   └── game/           # GameCard, GameGrid, GameSection, GenreList, SortMenu, ...
+├── pages/              # Route-level components
+│   ├── HomePage.tsx
+│   ├── GamesPage.tsx
+│   └── GameDetailPage.tsx
+├── App.tsx             # Router shell + lazy-loaded routes
+├── theme.tsx           # Chakra UI dark theme
+└── main.tsx            # React root + providers
 ```
+
+## Routes
+
+| Path | Page |
+|---|---|
+| `/` | Home — hero, curated game sections, about |
+| `/games` | Full game browser with filters and infinite scroll |
+| `/games/:id` | Game detail — screenshots, description, metadata |
